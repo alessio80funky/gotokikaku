@@ -1,1 +1,1 @@
-# gotokikaku
+# 後藤企画Javascript入門
