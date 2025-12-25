@@ -75,4 +75,52 @@ console.log(fruit);
 console.log(fruit[0]);
 console.log(fruit[2]);
 
+//ネスト(巣）配列のネスト
+
+let users = [
+// 0     1
+["taro", 20], //0番目の配列
+// 0       1
+["hanako", 25]//1番目の配列
+
+];
+
+//サブ配列を取り出す
+
+console.log(users[0]);
+
+//サブ配列の中に入っている特定のデータを取り出す
+               //配列　//中身
+console.log(users[0][1], users[1][0]);//入れ子の配列と言います。（インスタンスプロパティ　また後日説明します）
+
+
+
+//object
+
+//ラペルで整理する
+
+let person = {
+    name: "mario",
+    age:32,
+    job: "engineer"
+}
+
+console.log(person);
+console.log(person.age , person.job);
+
+
+//ネスト（巣）オブジェクトのネスト
+
+let student = {
+    name: "mario",
+    score: {
+        math: 80,
+        english: 70
+    }
+}
+
+console.log(student);
+console.log(student.score.math);//入れ子のオブジェクト
+
+//ネストについて注意（配列とオブジェクト）
 
