@@ -123,4 +123,23 @@ console.log(student);
 console.log(student.score.math);//入れ子のオブジェクト
 
 //ネストについて注意（配列とオブジェクト）
+//ネストはできる限り2段階まで（でないと解読性が下がる）
+
+let company = {
+    name: "Maruweb",
+    address:{
+        city: "osaka",
+        zip: "530-0001",
+        office: {
+            room:"502",
+            address2: [
+                ["name1", 123],
+                ["name2", 456]
+            ]
+        }
+    }
+}
+
+console.log(company.address.office.room);
+console.log(company.address.office.address2[0][0]);
 
