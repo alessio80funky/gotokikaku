@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <style>
+    body { font-family: sans-serif; text-align: center; padding: 40px; }
+    button { margin: 10px; padding: 10px 20px; font-size: 16px; } 
+    </style>
+    <title>レジ</title>
+</head>
+<body>
+
+    <h1>レジ</h1>
+    <button onclick="coffee(450)">コーヒー</button>
+    <button onclick="bagle(300)">ベーグル</button>
+    <button onclick="addDiscount()">１割引</button>
+    <button onclick="tax()">税込</button>
+    <button onclick="reset()">リセット</button>
+    <button onclick="addDiscount2()">２割引</button>
+
+    <p>合計：<span id="total">0</span>円</p>
+
+    <script>
+        let total = 0;
+
+        function update(){
+            document.getElementById("total").textContent = total.toFixed(0);
+        }
+
+        function coffee(price){
+            total += price;
+            update();
+            return total;
+        }
+
+        function bagle(price){
+            total += price;
+            update();
+            return total;
+        }
+
+        function addDiscount(){
+            total *= 0.9;
+            update();
+            return total;
+        }
+
+        function tax(){
+            total *= 1.1;
+            update();
+            return total;
+        }
+
+        function reset(){
+            total = 0;
+            update();
+            return total;
+        }
+
+        function addDiscount2(){
+            total *= 0.8;
+            update();
+            return total;
+        }
+
+    </script>
+</body>
+</html>
