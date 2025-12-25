@@ -58,7 +58,7 @@ const + プロパティ名　= "値"（実際に取り扱たデータを示す�
 
 let a = 10;
 a = 20;
-console.log(a);
+console.log(a);//20
 
 //constに関しての注意
 
