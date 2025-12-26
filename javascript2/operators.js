@@ -30,3 +30,5 @@
 };
 
 console.log(typeof(person.age))
+
+

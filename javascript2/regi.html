@@ -11,8 +11,8 @@
 <body>
 
     <h1>レジ</h1>
-    <button onclick="coffee(450)">コーヒー</button>
-    <button onclick="bagle(300)">ベーグル</button>
+    <button onclick="coffee()">コーヒー</button>
+    <button onclick="bagle()">ベーグル</button>
     <button onclick="addDiscount()">１割引</button>
     <button onclick="tax()">税込</button>
     <button onclick="reset()">リセット</button>
@@ -22,19 +22,19 @@
 
     <script>
         let total = 0;
-
+      
         function update(){
             document.getElementById("total").textContent = total.toFixed(0);
         }
 
-        function coffee(price){
-            total += price;
+        function coffee(){
+            total += 450;
             update();
             return total;
         }
 
-        function bagle(price){
-            total += price;
+        function bagle(){
+            total += 300;
             update();
             return total;
         }
