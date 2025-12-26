@@ -1,7 +1,5 @@
 # 後藤企画Javascript入門
 
-# 後藤企画Javascript入門
-
 ＊Javascript1＊
 
 データ型の紹介
