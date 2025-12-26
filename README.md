@@ -32,3 +32,7 @@ increment/decrement [++] [--]
 
 multiply/division [*][/] + 掛け算/割り算と小点数の計算について
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6fb65c1 (12/26 11:48)

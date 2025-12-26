@@ -42,7 +42,7 @@ let z = 0.2 * 3;
 
 console.log(z);//0.6000000000000001
 console.log(Math.round(z));//1
-console.log(z.toFixed(1));
+console.log(z.toFixed(1));//0.6
 
 //0.5以上だと１になる
 
