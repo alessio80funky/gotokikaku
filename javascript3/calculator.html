@@ -27,16 +27,20 @@
 
     <script>
         //リセットボタン
+        
         document.getElementById("reloadButton").addEventListener("click", function(){
             window.location.reload();
         });
-
+ 
         //計算パネル
         function calculation(operation){
             //インプットを収得
             //parseFloat文字列を解析して数字に変換する
             const n1 = parseFloat(document.getElementById("num1").value)
             const n2 = parseFloat(document.getElementById("num2").value)
+
+            /*const n1 = document.getElementById("num1").value
+            const n2 = document.getElementById("num2").value*/
 
             //データの引き渡し用の変数
             let result;
