@@ -28,4 +28,4 @@ const b = 20;
 
 console.log( typeof a + typeof b);
 
-console.log(`1 + 2 + 3 + ${a + b}`);
+console.log(`1 + 2 + 3 + ${a + b}`);//埋め込みタグ

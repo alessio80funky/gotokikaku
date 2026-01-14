@@ -38,10 +38,13 @@ console.log((x + y) /100);//0.4200000000000001
 
 console.log(Math.round(x + y)/100);//0.42
 
+//例外の四捨五入
 let z = 0.2 * 3;
 
 console.log(z);//0.6000000000000001
 console.log(Math.round(z));//1
+
+//この場合はtoFixedというメソッドを使います。
 console.log(z.toFixed(1));//0.6
 
 //0.5以上だと１になる
