@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+  :root { --ink:#1f2937; --muted:#6b7280; --card:#fff; --bg:#f7fafc; --brand:#6A38C2; }
+  body{margin:0;font-family:system-ui,Segoe UI,Noto Sans JP,sans-serif;background:var(--bg);color:var(--ink)}
+  .wrap{max-width:980px;margin:24px auto;padding:0 12px}
+
+  .grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .card{background:var(--card);border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+  .row{display:flex;gap:8px;align-items:center;margin:6px 0}
+  .muted{color:var(--muted);font-size:12px}
+
+  h1{
+    margin:0 0 12px;
+    font-size: medium;
+}
+  input,select,button{padding:8px;border-radius:8px;border:1px solid #e5e7eb}
+  button{background:var(--brand);color:#fff;border:none;cursor:pointer}
+  pre{background:#0b1020;color:#c7d2fe;padding:12px;border-radius:8px;overflow:auto;min-height:120px}
+
+
+    </style>
+    <title>代入と比較演算子練習アプリ</title>
+</head>
+<body>
+
+<div class="wrap"><!--メインDIV------>
+<!--インプットセクション----------------------------------------------------------------->
+<div class="card"><!--インプットセクションのスタート-->
+
+    <h1>インプットセクション</h1>
+
+    <div class="row"><!--インプットセクションの一番目のインタフェース（入力）-->
+        <label>x:</label>
+        <input placeholder="例：0 ,'', null など" id="value1">
+    </div>
+
+    <div class="row"><!--インプットセクションの二番目のインタフェース（オプション）-->
+   <select id="operation">
+           <optgroup label="算術型代入演算子">
+            <option value="+=">+=</option>
+            <option value="-=">-=</option>
+            <option value="*=">*=</option>
+            <option value="/=">/=</option>
+            <option value="%=">%="</option>
+            <option value="**=">**=</option>
+           </optgroup>
+           <optgroup label="比較演算子">
+            <option value=">">></option>
+            <option value="<"><</option>
+            <option value="===">===</option>
+            <option value="!==">!==</option>
+           </optgroup>
+   </select>
+    </div>
+
+    <div class="row"><!--インプットセクションの三番目のインタフェース（入力）-->
+        <label>y:</label>
+        <input placeholder="例：10 ,hello, true など" id="value2">
+    </div>
+
+    <button id="run">実行</button>
+
+</div><!--インプットセクションの終わり-->
+<!--インプットセクション----------------------------------------------------------------->
+<!--アウトプットセクション----------------------------------------------------------------->
+
+<div class="card">
+    <h1>アウトプットセクション</h1>
+    <div class="row">
+        <strong>結果：</strong><span id="output"> </span>
+    </div>
+   <h1>ログ</h1>
+   <pre id="log"></pre>
+</div>
+
+<!--アウトプットセクション----------------------------------------------------------------->
+</div> <!--メインDIVはここまで------>
+
+<script>
+
+    //データ読み込み
+    const $ = (id) => document.getElementById(id);
+    const log = (msg) => {$('log').textContent += msg + "\n"}
+    //JSON.parse() は、文字列を JSON として解析し、文字列によって記述されている JavaScript の値やオブジェクトを構築します。 
+    function parseInput(raw){
+        try{
+             return JSON.parse(raw)
+        } catch {
+            return raw;
+        }
+    }
+
+  //addEventListener()は特定のイベントを呼び出すために使うメソッドです。
+
+$('run').addEventListener("click", ()=> {
+//ターミナルの初期状態
+    $('log').textContent="";
+//データの収得
+    let x = parseInput($("value1").value);
+    let y = parseInput($("value2").value);
+    let operation = $("operation").value;
+//ターミナルの出力メッセージのパターン（インプットしたデータを可視化）
+    log(`x の値= ${String(x)}(type : ${typeof x})`)
+    log(`y の値= ${String(y)}(type : ${typeof y})`)
+    log(`選んだ演算子：${operation}`)
+
+ //収得したデータを制御するロジック
+    let result = null;
+
+    switch(operation){
+        case '+=' : x += y; break;
+        case '-=' : x -= y; break;
+        case '*=' : x *= y; break;
+        case '/=' : x /= y; break;
+        case '%=' : x %= y; break;
+        case '**=' : x **= y; break;
+
+        case '>' : result = x > y; break;
+        case '<' : result = x < y; break;
+        case '===' : result = x === y; break;
+        case '!==' : result = x !== y; break;
+    }
+
+//処理後の結果(全ての演算子)
+    if(result !== null){
+        log(`比較結果 = ${result}(type : ${typeof result})`);
+        $("output").textContent = `${result}(type : ${typeof result})`
+    }else{
+        log(`計算後 x = ${String(x)}(type : ${typeof x})`);
+        $("output").textContent = ` ${String(x)}(type : ${typeof x})`
+    }
+
+})
+
+</script>
+
+</body>
+</html>
