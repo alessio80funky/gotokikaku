@@ -29,5 +29,5 @@ console.log(array[1])//undefined
 //変数や関数は削除できない＝＞無視されます。
 
 let x = 10;
-delete x;
+delete x;//無視される
 console.log(x);
