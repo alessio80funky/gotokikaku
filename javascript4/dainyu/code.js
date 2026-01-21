@@ -27,7 +27,7 @@ let message = "hello";
 
 message += "world";
 
-console.log(message)
+console.log(message)//helloworld
 
 //計算がずれるから使わない
 let y = "10";//初期値が同じくストリング型でも計算が合わなくなる（番号型入れても）
