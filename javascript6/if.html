@@ -15,6 +15,28 @@
         padding: 8px;
         width:100%;
     }
+
+    .login-err{
+        color: red;
+        font-weight: bold;
+    }
+
+    .no-active{
+        color: rgb(156, 156, 8);
+        font-weight: bold;
+    }
+
+    .login-ok{
+        color: green;
+        font-weight: bold;
+    }
+
+    .pass-err{
+        color: palevioletred;
+        font-weight: bold;
+    }
+
+
     </style>
     <title>ログインロジックシステム</title>
 </head>
@@ -46,19 +68,23 @@
 
         if(!user){
             r.textContent = "❌ユーザが存在しない"
+            r.className = "login-err"
             return;
         }
 
         if(!user.active){
             r.textContent ="⚠️アカウント無効です。"
+            r.className = "no-active"
             return;
         }
 
         if(user.pass === p){
             r.textContent = `✅ログイン成功 ようこそ${user.name}様`
+            r.className ="login-ok"
             return;
         }else{
             r.textContent = "パスワードが違います"
+            r.className ="pass-err"
             return;
         }
 
