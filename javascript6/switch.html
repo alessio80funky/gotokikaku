@@ -5,6 +5,27 @@
    <style>
      body { font-family: sans-serif; text-align: center; padding: 40px; }
     button { margin: 10px; padding: 10px 20px; font-size: 16px; }
+
+    .default{
+        color: red;
+        font-weight: bold;
+    }
+
+    .exit{
+        color: rgb(156, 156, 8);
+        font-weight: bold;
+    }
+
+    .calc{
+        color: green;
+        font-weight: bold;
+    }
+
+    .help{
+        color: palevioletred;
+        font-weight: bold;
+    }
+
    </style>
     <title>コマンド入力アプリ</title>
 </head>
@@ -17,7 +38,40 @@
 
     <pre id="result"></pre>
 
-    <script></script>
+    <script>
+        const $ = id => document.getElementById(id);
+
+        $("run").addEventListener("click", () => {
+
+            const cmd = $("cmd").value;
+
+            let output = "";
+            
+
+
+            switch(cmd){
+                case "help":
+                output = "help: 利用可能なコマンドは\n help\n calc\n exit\n";
+                className = "help";
+                break;
+                case "calc":
+                output = "calc: 計算コマンドです";
+                className = "calc";
+                break;
+                case "exit":
+                output = "exit: アプリを終了するコマンドです";
+                className = "exit";
+                break;
+                default :
+                output ="コマンド存在しない";
+                className = "default";
+            }
+
+        $("result").textContent = output;
+        $("result").className = className;
+
+        })
+    </script>
     
 </body>
 </html>
