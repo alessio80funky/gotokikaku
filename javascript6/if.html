@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <style>
+    body{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        max-width: 480px;
+        margin: 30px auto;
+        padding: 12px;
+    }
+
+    input,button{
+        margin: 6px 0;
+        padding: 8px;
+        width:100%;
+    }
+    </style>
+    <title>ログインロジックシステム</title>
+</head>
+<body>
+
+    <h2>ログイン判定アプリ</h2>
+    <p>ユーザーとパスワードを入力して下さい</p>
+
+    <input id="user" placeholder="ユーザ名">
+    <input type="password" id="pass" placeholder="パスワード">
+    <button id="loginBtn">ログイン</button>
+
+    <div id="result"></div>
+
+    <script>
+
+      const users = [
+            {name: "maru", pass:"1234", active: true},
+            {name: "hanako", pass:"1234", active: false},
+        ]
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+        const u = document.getElementById("user").value;
+        const p = document.getElementById("pass").value;
+
+        const r =  document.getElementById("result");
+
+        const user = users.find(x => x.name === u);
+
+        if(!user){
+            r.textContent = "❌ユーザが存在しない"
+            return;
+        }
+
+        if(!user.active){
+            r.textContent ="⚠️アカウント無効です。"
+            return;
+        }
+
+        if(user.pass === p){
+            r.textContent = `✅ログイン成功 ようこそ${user.name}様`
+            return;
+        }else{
+            r.textContent = "パスワードが違います"
+            return;
+        }
+
+    })
+
+    </script>
+</body>
+</html>
