@@ -42,8 +42,8 @@ if(score >= 90){
 
 //if ネスト
 
-let age = 17;
-isMember = false;
+let age = 17;　
+let isMember = false;
 
 if(age >= 18){
     if (isMember){ 
