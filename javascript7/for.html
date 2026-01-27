@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <title>forEach練習</title>
+</head>
+<body>
+    <h1>forEachアプリ</h1>
+<!---->
+
+    <div>
+        <h2>セクション❶ リストを表示</h2>
+        <p>下のボタンを押すとリストが表示されます</p>
+        <button id="showItems">商品表示</button>
+        <button id="clearItems">クリア</button>
+        <ul id="itemList"></ul>
+    </div>
+
+<!---->
+
+    <div>
+        <h2>セクション❷ 計算を行う</h2>
+        <p>カンマ区切りで、数字を入力して、計算ボタンを押してみましょう</p>
+        <input id="num" placeholder="例：10,20,30">
+        <button id="calcBtn">計算</button>
+        <pre class="result" id="result"></pre>
+    </div>
+
+<!---->
+
+    <div>
+        <h2>セクション❸ ガイド</h2>
+        <p><code>forEach()</code>は入れ列の中身を取り出すためのメソッドです</p>
+       
+     <pre>
+        const numbers = [10, 20 ,30];
+
+
+     numbers.forEach((value, index, array) => {
+     console.log(value, index, array);
+    });
+
+    結果:
+
+    0 10 [ 10, 20, 30 ]
+    1 20 [ 10, 20, 30 ]
+    2 30 [ 10, 20, 30 ]
+    
+     </pre>
+    </div>
+
+<!---->
+
+<script src="./script.js"></script>
+
+</body>
+</html>
