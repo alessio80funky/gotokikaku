@@ -45,5 +45,4 @@ while (j < 10){
     j++;
     if(j % 2 === 0) continue;
     console.log(j);
-    
 }
