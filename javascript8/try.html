@@ -34,5 +34,37 @@
     <input id="password" type="password" placeholder="パスワード">
     <button id="loginBtn">ログイン</button>
     <div id="result"></div>
+
+    <script>
+        document.getElementById("loginBtn").addEventListener("click",() => {
+            const user = document.getElementById("user").value;
+            const password = document.getElementById("password").value;
+            const result = document.getElementById("result");
+
+            try{
+                //ログイン成功のケース
+                if(user === "admin" && password === "1234"){
+                    result.textContent = `✅ログイン成功`;
+                    result.className = "ok";
+                    result.style.font = "bold"
+                    return;
+                }
+                //エラーのパターン
+                if(user && !password){
+                    throw new Error("パスワードを入力して下さい");
+                }else if (!user && password){
+                    throw new Error("ユーザー名を入力して下さい");
+                }else{
+                    throw new Error("ユーザー名またはパスワードが違います");
+                };
+
+            }catch(error){
+                    result.textContent = "❌エラー：" + error.message + error.name;
+                    result.className = "err";
+                    result.style.font = "bold";
+            }
+
+       })
+    </script>
 </body>
 </html>
