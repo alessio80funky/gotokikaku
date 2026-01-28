@@ -2,13 +2,13 @@
 
 
 /*
-for(初期値; 条件式; インクリメント演算子){
+for(初期値; 条件式; インクリメント演算子（更新）){
     //実行したい内容をいれます
 }
 */
 
 for(let i = 0; i < 100; i++){
-    console.log("i=", i)
+    console.log("i=", i);
 }
 
 //for...in(オブジェクトにしか使用しない)
@@ -73,6 +73,6 @@ for (let{name, color} of object) {
 //注意 カンマ演算子
 
 
-for (let i = 0, j = 5,  x = 6; i < 10; i++, j++, x++ ){
+for (let i = 0, j = 5,  x = 6; i < 10; i++, j++, x++){
     console.log(i * j + x)
 }
