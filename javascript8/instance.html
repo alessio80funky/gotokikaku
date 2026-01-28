@@ -1,0 +1,123 @@
+<!--✅ がついているインスタンスプロパティはよく使われるインスタンスプロパティです。-->
+
+<!-- .className ✅-->
+<!-- 要素のクラスを取得・変更します。-->
+
+<div id="box" class="red">四角</div>
+
+<script>
+    const box = document.getElementById("box");
+    console.log(box.className);//red
+    box.className = "blue";
+</script>
+
+
+<!-- .id -->
+<!-- id属性の取得-->
+
+<div id="oId">内容</div>
+<script>
+const div = document.getElementById("Id");
+</script>
+
+<!--  .title -->
+<!--マウスを載せた時に出るツールチップ。 -->
+
+<p id="tip" title="タイトル">ツールチップ</p>
+<script>
+    const p = document.getElementById("tip");
+    p.title = "変更されたタイトルです！"
+</script>
+
+<!-- .tagName -->
+<!-- タグ名（大文字で返る）。タグ名習得-->
+
+<div id="tag">タグ名確認</div>
+<script>
+const el = document.getElementById("tag");
+console.log(el.tagName); // DIV
+</script>
+
+<!-- .innerText -->
+<!-- タグの中のテキストのみを取得・変更。-->
+<p id="text">こんにちは</p>
+<script>
+const p = document.getElementById("text");
+console.log(p.innerText); // こんにちは
+p.innerText = "こんばんは";
+</script>
+
+<!--  .innerHTML ✅-->
+<!-- HTMLを含めて取得・変更。-->
+<div id="content"><strong>太字</strong>です</div>
+<script>
+const test = document.getElementById("content");
+console.log(test.innerHTML); // <strong>太字</strong>です
+test.innerHTML = "<em>斜体</em>に変更！";
+</script>
+
+<!-- .outerHTML -->
+<!--要素自身ごと取得・変更。-->
+<p id="demo">テキスト</p>
+<script>
+const p = document.getElementById("demo");
+console.log(p.outerHTML); // <p id="demo">テキスト</p>
+p.outerHTML = "<h2>書き換えられました！</h2>";
+</script>
+
+<!--.value ✅-->
+<!--入力値の取得・変更（inputやtextareaなど）。-->
+<input id="name" value="Maru">
+<script>
+const nameInput = document.getElementById("name");
+console.log(nameInput.value); // Maru
+nameInput.value = "Alessio";
+</script>
+
+<!-- .selectedIndex ✅-->
+<!-- <select>で選ばれている項目のインデックス。-->
+    <select id="city">
+        <option>東京</option>
+        <option>大阪</option>
+        <option>福岡</option>
+      </select>
+      <script>
+      const sel = document.getElementById("city");
+      sel.selectedIndex = 2; // 福岡を選択状態にする
+      console.log(sel.selectedIndex); // 2
+      </script>
+
+
+<!--.checked　✅-->
+<!--チェックボックスの状態。-->
+<input type="checkbox" id="agree">同意します
+<script>
+const chk = document.getElementById("agree");
+chk.checked = true; // チェックをONにする
+console.log(chk.checked); // true
+</script>
+
+
+<!--.files　✅-->
+<!--ファイル選択の情報を取得。-->
+<input type="file" id="uploader" multiple>
+<script>
+const up = document.getElementById("uploader");
+up.addEventListener("change", () => {
+  console.log(up.files); // FileListオブジェクト
+  console.log(up.files[0].name); // 選択した1つ目のファイル名
+});
+</script>
+
+
+<!-- .style ✅-->
+<!--インラインスタイルを直接操作。-->
+<div id="box2" style="width:100px; height:100px; background:red;"></div>
+<script>
+const box2 = document.getElementById("box2");
+box2.style.background = "purple";
+box2.style.borderRadius = "10px";
+box2.style.transform = "rotate(0deg)";
+</script>
+
+<!--✅ がついているインスタンスプロパティはよく使われるインスタンスプロパティです。-->

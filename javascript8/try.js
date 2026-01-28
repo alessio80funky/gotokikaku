@@ -40,12 +40,12 @@ try{
 }
 
 try{
-    let num = "alice";
+    let num = "abc";
 
     if( num === "alice"){
         throw new Error("文字列使えません");
     };
    console.log(num.toFixed(0));
 }catch(error){
-    console.log("エラー：",error.message);
+    console.log("エラー：",error.name,error.message);
 };
