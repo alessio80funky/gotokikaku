@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css"/>
+    <title>Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div id="wrap" class="wrap">
+<h1 id="title"></h1>
+<canvas id="Chart" width="400" height="200"></canvas>
+<button id="btn">読み込み</button>
+<pre id="output"></pre>
+
+</div>
+
+
+<script>
+
+    document.getElementById("btn").addEventListener("click", async () => {
+        const output = document.getElementById("output");
+
+        try{
+        const res = await fetch("./data.json");
+        const text = await res.text();
+        const data = JSON.parse(text);
+
+        document.getElementById("title").textContent = data.title || "グラフ";
+
+    const ctx = document.getElementById("Chart");
+    
+      // 連打するとグラフが重なるので、既存があれば破棄（安全策）
+    if (window.mychary) window.myChart.destroy();
+    
+       window.myChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: data.labels,
+        datasets: data.datasets.map(ds => ({
+            ...ds,
+        }))
+           
+       
+    },
+    options: {
+        responsive: true,
+        plugins: {
+           legend:{
+            position: "right"
+           }
+        }
+    },
+    scales: {
+        y:{
+            beginAtZero: true
+        }
+    }
+});
+ 
+
+    }catch(error){
+        output.textContent = "データ読み込みませんでした。" + error.message;
+    }
+
+
+    })
+
+   
+
+
+</script>
+    
+</body>
+</html>
