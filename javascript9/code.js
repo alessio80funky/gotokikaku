@@ -41,7 +41,30 @@ const n = new Number(10);//一つの指定しかできない
 console.log(typeof n);
 console.log(n.valueOf());
 
+const num4 = 100000;
+
+console.log(num4.toLocaleString("ja-JP",{style:"currency", currency:"JPY"}))
+console.log(num4.toLocaleString("en-US",{style:"currency", currency:"USD"}))
+console.log(num4.toLocaleString("it-IT",{style:"currency", currency:"EUR"}))
+console.log(num4.toLocaleString("kr-KR",{style:"currency", currency:"KRW"}))
+
+
 //mathメソッド
+
+const math = 4.6;
+const math2 = 4.1
+const math3 = 4.1;
+
+console.log(Math.round(math));
+console.log(Math.round(math2));
+
+console.log(Math.ceil(math));
+console.log(Math.ceil(math2));
+
+console.log(Math.floor(math));
+console.log(Math.floor(math3));
+
+
 
 
 
