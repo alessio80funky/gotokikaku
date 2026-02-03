@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>出勤管理アプリ</title>
+</head>
+<body>
+
+    <h1>勤怠アプリ</h1>
+    <p>本日の日付：<span id="today"> </span></p>
+    <button id="start">出勤</button>
+    <button id="end">退勤</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>日付</th>
+                <th>出勤時刻</th>
+                <th>退勤時刻</th>
+                <th>勤務時間合計</th>
+            </tr>
+        </thead>
+        <tbody id="tableData"></tbody>
+    </table>
+
+    <div id="chartContainer">
+        <canvas id="Chart"></canvas>
+    </div>
+
+    <script>
+        //日付の処理・JSとHTMLのIDの連携の処理
+
+        //JSとHTMLのIDの連携の処理(button以外のId)
+        const todayDate = document.getElementById("today");
+        const tableData =  document.getElementById("tableData");
+
+         //日付の処理
+
+         const now = new Date();
+         todayDate.textContent = now.toLocaleDateString("ja-JP", {
+            year:"numeric", 
+            month:"long", 
+            day:"numeric", 
+            weekday:"long", 
+            hour:"2-digit",minute:"2-digit"
+         });
+
+         //localStorageの連携(データ収得)
+
+         let records = JSON.parse(localStorage.getItem("records")  || "[]");
+
+            //出勤ボタン
+            document.getElementById("start").addEventListener("click", () =>{
+
+                const date = new Date;
+
+                const today = date.toLocaleDateString("ja-JP");
+                const time = date.toLocaleDateString("ja-JP");
+
+                //データの重複を防ぐ
+                const exist = records.find(r => r.date === today);
+                if(exist){
+                    alert("本日はすでに出勤が登録されています。")
+                    return;
+                }
+
+                records.push({date: today, start: time, end:null})
+                update();
+            })
+
+    //データのアップデートのロジック
+
+   //保存
+    function update(){
+        localStorage.setItem("records", JSON.stringify(records))
+    }
+
+      //テーブルにデータ表示する
+
+    function tableWiew(){
+        tableData.innerHTML="";
+        
+    }
+
+    </script>
+</body>
+</html>
