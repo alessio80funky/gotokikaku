@@ -57,7 +57,7 @@
                 const date = new Date;
 
                 const today = date.toLocaleDateString("ja-JP");
-                const time = date.toLocaleDateString("ja-JP");
+                const time = date.toLocaleTimeString("ja-JP");
 
                 //データの重複を防ぐ
                 const exist = records.find(r => r.date === today);
@@ -66,24 +66,80 @@
                     return;
                 }
 
-                records.push({date: today, start: time, end:null})
+                records.push({date: today, start: time, end:null, hour:0})
                 update();
             })
+
+            //退勤ボタン
+
+            document.getElementById("end").addEventListener("click", () =>{
+            const date = new Date;
+
+            const today = date.toLocaleDateString("ja-JP");
+            const time = date.toLocaleTimeString("ja-JP");
+
+
+            const recordData = records.find(r => r.date === today);
+            if(!recordData){
+                alert("出勤データありません。先に打刻して下さい。")
+                return;
+            }
+
+            recordData.end = time;
+
+            //合計の計算のロジック
+            const startTime = new Date(`${recordData.date}${recordData.start}`);
+            const endTime = new Date(`${recordData.date}${recordData.end}`);
+
+            const hour = ((endTime - startTime) / (1000 * 60 * 60)).toFixed(2);
+            recordData.hour = parseFloat(Number(hour));
+
+            const difference = endTime - startTime;
+            const totalMins = difference / 1000 * 60;
+            const hours = totalMins / 60;
+            const minutes = totalMins % 60;
+            recordData.h= parseFloat(Number(hours));
+            recordData.m= parseFloat(Number(minutes));
+
+            update();
+    })
 
     //データのアップデートのロジック
 
    //保存
     function update(){
         localStorage.setItem("records", JSON.stringify(records))
+        tableWiew()
     }
 
       //テーブルにデータ表示する
 
     function tableWiew(){
         tableData.innerHTML="";
+
+        records.forEach(r => {
+
+
+            const tr = document.createElement("tr");
+
+            tr.innerHTML=`
+        <td>${r.date}</td>
+        <td>${r.start || "-"}</td>
+        <td>${r.end || "-"}</td>
+        <td>${r.hour}</td>
+        <td>${r.h}</td>
+        <td>${r.m}</td>
+        `; 
+
+        tableData.appendChild(tr);
+        })
+
+       
         
     }
 
+
+    tableWiew();
     </script>
 </body>
 </html>
