@@ -18,59 +18,96 @@
 
 
 <script>
-
+    // 「読み込み」ボタンがクリックされたときに実行する処理を登録（async なので await が使える）
     document.getElementById("btn").addEventListener("click", async () => {
-        const output = document.getElementById("output");
-
-        try{
+  
+      // <pre id="output"> を取得（エラー表示などの出力先）
+      const output = document.getElementById("output");
+  
+      try {
+        // data.json を読み込み（同じフォルダにある想定）
         const res = await fetch("./data.json");
+  
+        // レスポンスの中身を「文字列」として取り出す
         const text = await res.text();
+  
+        // JSON文字列を JavaScript のオブジェクトに変換する
         const data = JSON.parse(text);
-
+  
+        // タイトル表示：data.title があればそれ、なければ「グラフ」
         document.getElementById("title").textContent = data.title || "グラフ";
-
-    const ctx = document.getElementById("Chart");
-    
-      // 連打するとグラフが重なるので、既存があれば破棄（安全策）
-    if (window.mychary) window.myChart.destroy();
-    
-       window.myChart = new Chart(ctx, {
-    type: "bar",
-    data: {
-        labels: data.labels,
-        datasets: data.datasets.map(ds => ({
-            ...ds,
-        }))
-           
-       
-    },
-    options: {
-        responsive: true,
-        plugins: {
-           legend:{
-            position: "right"
-           }
-        }
-    },
-    scales: {
-        y:{
-            beginAtZero: true
-        }
-    }
-});
- 
-
-    }catch(error){
+  
+        // <canvas id="Chart"> を取得（Chart.js の描画先）
+        const ctx = document.getElementById("Chart");
+  
+        // 連打すると前のグラフが残って重なるので、以前のグラフがあれば破棄する（安全策）
+        if (window.mychary) window.myChart.destroy();
+  
+        // 新しくレーダーチャートを作成して window.myChart に保存する（次回 destroy するため）
+        window.myChart = new Chart(ctx, {
+  
+          // チャート種類：レーダー
+          type: "bar",
+  
+          // グラフに渡すデータ（ラベルとデータセット）
+          data: {
+  
+            // レーダーの各軸の名前（例：["国語","数学",...])
+            labels: data.labels,
+  
+            // datasets を加工：各 ds をそのまま展開して返す（今は “そのままコピー” の意味）
+            datasets: data.datasets.map(ds => ({
+  
+              // ds の中身（label / data / backgroundColor など）をそのまま展開
+              ...ds,
+  
+            }))
+  
+          },
+  
+          // 見た目や挙動の設定
+          options: {
+  
+            // 画面サイズに合わせて自動でリサイズ
+            responsive: true,
+  
+            // プラグイン設定（凡例など）
+            plugins: {
+  
+              // 凡例（legend）の設定
+              legend: {
+  
+                // 凡例を右側に表示
+                position: "left"
+  
+              }
+  
+            }
+  
+          },
+  
+          // 軸（scales）の設定（※レーダーだと通常 r を使うことが多いが、ここは元コードを保持）
+          scales: {
+  
+            // y軸設定（元コードそのまま）
+            y: {
+  
+              // 0から始める
+              beginAtZero: true
+  
+            }
+  
+          }
+  
+        });
+  
+      } catch (error) {
+        // 失敗したら output にエラーメッセージを表示する
         output.textContent = "データ読み込みませんでした。" + error.message;
-    }
-
-
-    })
-
-   
-
-
-</script>
+      }
+  
+    });
+  </script>
     
 </body>
 </html>

@@ -13,7 +13,7 @@ const lang4 = "javascript";
 console.log(lang4.includes("a"));
 
 const lang5 = "javascript";
-console.log(lang5.slice(0, 2));
+console.log(lang5.slice(0, 3));
 
 const lang6 = "javascript";
 console.log(lang6.replace("java", "type"))
