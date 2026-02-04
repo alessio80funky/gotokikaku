@@ -24,6 +24,9 @@ const transactionList = document.getElementById("transactionList");
 
     loadTransactions();
 
+    updateSummary()
+    updateTransList();
+
     form.addEventListener("submit", (e) =>{
         e.preventDefault();
         
@@ -47,6 +50,8 @@ const transactionList = document.getElementById("transactionList");
         transactions.unshift(tr);
         saveTransactions();
         form.reset();
+        updateSummary();
+        updateTransList();
 
     })
  }
@@ -78,9 +83,84 @@ function updateSummary(){
 
     const total = income - expense;
 
+    totalExpense.textContent = `¥${expense.toLocaleString()}`
+    totalIncome.textContent = `¥${income.toLocaleString()}`
+    balanceTotal.textContent = `¥${total.toLocaleString()}`
 
 }
 
  
 //履歴のリストの生成と更新のロジック
 
+
+function updateTransList(){
+    transactionList.innerHTML = "";
+
+    if(transactions.length === 0){
+        transactionList.innerHTML ='<li style="text-align: center; color: #999; padding: 20px;">取引履歴がありません</li>'
+        return;
+    };
+
+    transactions.forEach(log => {
+        const li = document.createElement('li');
+        li.className = `transaction-item ${log.type}`;
+
+        const sign = log.type === 'income' ? '+' : '-';
+
+        li.innerHTML = `
+        <div class="transaction-info">
+                <div class="transaction-description">${log.description}</div>
+                <small style="color: #999;">${log.date}</small>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="transaction-amount ${log.type}">
+                    ${sign}¥${log.amount.toLocaleString()}
+                </span>
+                <button class="btn-delete" onclick="deleteTransaction(${log.id})">削除</button>
+            </div>
+        `
+
+        transactionList.appendChild(li);
+
+    })
+}
+
+
+ //取引を削除するロジック
+
+ function deleteTransaction(id){
+    transactions = transactions.filter(tr => tr.id !== id);
+    saveTransactions();
+    updateTransList();
+    updateSummary();
+ }
+
+ let hourChartProp;//名前変更・追加
+
+    function hourChart(){//名前変更
+        const ctx = document.getElementById("Chart1").getContext("2d");
+
+        if(hourChartProp) hourChartProp.destroy();//名前変更
+
+        hourChartProp = new Chart(ctx, {//名前変更
+            type:"bar",
+            data: {
+                labels: records.map(r => r.date),
+                datasets:[{
+                    label: "時間",
+                    data: records.map(r => r.h),
+                    borderWidth:1
+                }],
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y:{
+                        beginAtZero: true
+                    }
+                }
+            }
+        })
+    }
+
+    hourChart();//追加
