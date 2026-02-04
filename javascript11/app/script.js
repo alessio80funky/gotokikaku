@@ -135,14 +135,14 @@ function updateTransList(){
     updateSummary();
  }
 
- let hourChartProp;//名前変更・追加
+ let hourChartProp;
 
-    function hourChart(){//名前変更
+    function hourChart(){
         const ctx = document.getElementById("Chart1").getContext("2d");
 
-        if(hourChartProp) hourChartProp.destroy();//名前変更
+        if(hourChartProp) hourChartProp.destroy();
 
-        hourChartProp = new Chart(ctx, {//名前変更
+        hourChartProp = new Chart(ctx, {
             type:"bar",
             data: {
                 labels: records.map(r => r.date),
@@ -163,4 +163,4 @@ function updateTransList(){
         })
     }
 
-    hourChart();//追加
+    hourChart();
