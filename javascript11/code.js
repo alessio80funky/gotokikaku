@@ -97,6 +97,24 @@ console.log(now.toTimeString())//11:05:57 GMT+0900 (Japan Standard Time)
 
 //設定・取得系
 
+//取得系
+
 const gotokikaku = new Date();
 
+console.log(gotokikaku.getMonth());//0月　→ 1月
+console.log(gotokikaku.getDay());//0 日曜日　、1 月曜日...など
+console.log(gotokikaku.getDate())
+console.log(gotokikaku.getFullYear())
+console.log(gotokikaku.getUTCDate())//getDateと同じ
+console.log(gotokikaku.getUTCFullYear())//getFullYearと同じ
 
+//設定系 (使う場面少ない)
+
+const today = new Date();
+
+today.setFullYear(2027, 0, 1)//指定型
+today.setMonth(2)
+today.setDate(25)
+today.setHours(today.getHours() + 9 ,23)//.setHours(時, 分, 秒, ミリ秒);
+
+console.log(today);
