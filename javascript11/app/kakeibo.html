@@ -25,6 +25,33 @@
             </div>       
         </div>
 <!--支出・収入合計---------------------------------------->
+<!--入力フォーム----------------------------------------->
+        <div class="form-container">
+            <h2>取引を追加</h2>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="description">内容</label>
+                    <input type="text" id="description" placeholder="例：食事代" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">金額</label>
+                    <input type="number" id="amount" placeholder="例：1000" required>
+                </div>
+                <div class="form-group">
+                    <label for="type">取引の選択</label>
+                    <select id="type">
+                        <option value="expense">支出</option>
+                        <option value="income">収入</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-submit">追加</button>
+            </form>
+        </div>
+<!--入力フォーム----------------------------------------->
+<!--履歴----------------------------------------------->
+
+<!--履歴----------------------------------------------->
     </div>
     
 </body>
