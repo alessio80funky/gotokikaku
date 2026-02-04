@@ -71,10 +71,10 @@ function saveTransactions(){
 function updateSummary(){
     const income = transactions
     .filter(tr => tr.type === "income")
-    .reduce((sum, tr) => sum + tr.amount)//合計に足していくロジック
+    .reduce((sum, tr) => sum + tr.amount, 0)//合計income足していくロジック
     const expense = transactions
     .filter(tr => tr.type === "expense")
-    .reduce((sum, tr) => sum + tr.amount)//合計に足していくロジック
+    .reduce((sum, tr) => sum + tr.amount, 0)//合計expense足していくロジック
 
     const total = income - expense;
 
