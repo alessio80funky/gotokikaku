@@ -21,7 +21,34 @@ const transactionList = document.getElementById("transactionList");
  init();
 
  function init(){
-    form.addEventListener("submit")
+
+    loadTransactions();
+
+    form.addEventListener("submit", (e) =>{
+        e.preventDefault();
+        
+        const description = String(descriptionInput.value);
+        const amount = Number(amountInput.value);
+        const type = typeSelect.value;
+
+        if(!description || !amount || amount <= 0){
+            alert("正しい内容と金額を入れて下さい。")
+            return
+        }
+
+        const tr = {
+            id: Date.now(),
+            description,
+            amount,
+            type,
+            date: new Date().toLocaleDateString("ja-JP")
+        }
+
+        transactions.unshift(tr);
+        saveTransactions();
+        form.reset();
+
+    })
  }
 
 //保存のロジック
@@ -38,4 +65,22 @@ function saveTransactions(){
         transactions = JSON.parse(stored)
     }
   }
+
+//合計セクションの更新のロジック（個別の）
+
+function updateSummary(){
+    const income = transactions
+    .filter(tr => tr.type === "income")
+    .reduce((sum, tr) => sum + tr.amount)//合計に足していくロジック
+    const expense = transactions
+    .filter(tr => tr.type === "expense")
+    .reduce((sum, tr) => sum + tr.amount)//合計に足していくロジック
+
+    const total = income - expense;
+
+
+}
+
+ 
+//履歴のリストの生成と更新のロジック
 
