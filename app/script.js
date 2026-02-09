@@ -1,4 +1,4 @@
-const GAS_WEBAPP_URL = "";
+const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzNtTdM9IvNIDOLzvSFjUo42WENugpqkyz_kP1-35b0tZ7VLMYyapYu5thRUC_T9-Av/exec";
 
 const form = document.getElementById("resForm");
 
@@ -10,20 +10,20 @@ const nameEl = document.getElementById("name");
 const dateEl = document.getElementById("date");
 const timeEl = document.getElementById("time");
 const peopleEl = document.getElementById("people");
-const NoteEl = document.getElementById("note");
+const noteEl = document.getElementById("note");
 
 function setStatus(text, ok){
     statusEl.textContent= text;
-    statusEl.className = "status" + (ok ? "ok" : "ng")
+    statusEl.className = "status " + (ok ? "ok" : "ng")
 }
 
 function buildPayload(){
     return{
-        name: nameEl.value,
-        date: dateEl.value,
-        time: timeEl.value,
+        name: String(nameEl.value),
+        date: String(dateEl.value),
+        time: String(timeEl.value),
         people: Number(peopleEl.value),
-        note: NoteEl.value,
+        note: String(noteEl.value),
 
     }
 }
@@ -39,7 +39,7 @@ function validate(payload){
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-     if(!GAS_WEBAPP_URL || GAS_WEBAPP_URL.includes("")){
+     if(!GAS_WEBAPP_URL){
         setStatus("GASのURLを設定されていない", false);
         return;
      }
@@ -59,19 +59,23 @@ form.addEventListener("submit", async (e) => {
  try{
      const res = await fetch(GAS_WEBAPP_URL, {
         method: "POST",
-        headers:{"Content-Type": "application/json"},
+        headers:{"Content-Type": "text/plain"},
         body:JSON.stringify(payload),
      })
 
-     const data = await res.json();
+     const text = await res.text();
 
-     if (data.ok){
-        setStatus("送信しました" , true);
-        form.reset();
-        peopleEl.value = "1";
-     }else{
-        setStatus("送信失敗", false)
+     let data;
+     try{
+      data = JSON.parse(text);
+     }catch{
+      data = {ok: false, message: text}
      }
+   if(data.ok){
+      setStatus("送信しました", true)
+      form.reset();
+      peopleEl.value = "1";
+   }
  }catch(error){
     setStatus("401: 通信エラー", false)
  }finally{
