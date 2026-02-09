@@ -17,8 +17,53 @@
     <pre id="log"></pre>
 <script>
 
+    const $  = id => document.getElementById(id);
+    const log = msg => $("log").textContent += msg + "\n"
+    const clear = () => $("log").textContent = "";
 
-    
+     //then
+
+     $("thenBtn").addEventListener("click", () => {
+        clear();
+
+        fetch("./users.json")
+        .then( res => {
+            if(!res.ok) throw new Error("ファイル見つかりません");
+            return res.json();
+        })
+        .then(data => {
+            log("✅データの読み込み成功")
+            data.forEach((
+                user => log(`ID:${user.id} ${user.name} ${user.age}`)
+            ))
+        })
+        .catch(err => {
+            log("❌データの読み込みに失敗しました" + err.message)
+        })
+
+     })
+
+       //async/await
+
+       $("asyncBtn").addEventListener("click", async () => {
+            clear();
+
+        try{
+                const res = await fetch("./users.json");
+                if(!res.ok)throw new Error("ファイル見つかりませんでした");
+                const data = await res.json();
+                log("✅データの読み込み成功");
+                for(const user of data){
+                    log(`ID:${user.id} ${user.name} ${user.age}`)
+                }
+            }catch(error){
+                log("❌データの読み込みに失敗しました" + err.message)
+            }
+
+       })
+
+
+
 </script>
 
 
