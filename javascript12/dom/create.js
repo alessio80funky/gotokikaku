@@ -26,3 +26,23 @@ const newEl = document.createElement("p");
 newEl.textContent = "これは挿入された段落です。";
 const refEl = document.getElementById("ref");
 oya.insertBefore(newEl, refEl); // refElの前に newEl を挿入
+
+/**
+ * 4. .remove()
+ * 要素を削除する。
+ */
+
+const removeBtn = document.getElementById("removeBtn");
+removeBtn.addEventListener("click", () => {
+  newEl.remove(); // newEl を削除
+});
+
+/**
+ * 5. innerHTML = ""
+ * 親要素内のすべての子要素を削除する。
+ */
+
+const clearBtn = document.getElementById("clearBtn");
+clearBtn.addEventListener("click", () => {
+  oya.innerHTML = ""; // container内の全要素を削除
+});
