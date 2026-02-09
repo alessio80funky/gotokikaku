@@ -16,3 +16,16 @@ function sayHello() {
   }
 
   btn.addEventListener("click", sayHello);
+
+  /**
+ * 2. removeEventListener("click", 関数)
+ * 登録したイベントを削除する。
+ * ※ 無名関数では削除できない（参照が必要だから）
+ */
+
+const removeBtn = document.getElementById("removeBtn");
+
+removeBtn.addEventListener("click", () => {
+    btn.removeEventListener("click", sayHello); // イベント削除
+    document.getElementById("log").textContent = "🧹 イベント削除完了";
+  });
