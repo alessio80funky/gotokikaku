@@ -4,7 +4,14 @@
     box-sizing: border-box;
 }
 
-#chartContainer { margin-top: 30px; }
+.chartContainer { 
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

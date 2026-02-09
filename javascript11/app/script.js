@@ -1,3 +1,4 @@
+let amountChart;
 
 const STORAGE_KEY = "kakeibo_transactions";
 
@@ -26,6 +27,7 @@ const transactionList = document.getElementById("transactionList");
 
     updateSummary()
     updateTransList();
+    amtChart();
 
     form.addEventListener("submit", (e) =>{
         e.preventDefault();
@@ -52,6 +54,7 @@ const transactionList = document.getElementById("transactionList");
         form.reset();
         updateSummary();
         updateTransList();
+        amtChart();
 
     })
  }
@@ -133,24 +136,37 @@ function updateTransList(){
     saveTransactions();
     updateTransList();
     updateSummary();
+    amtChart();
  }
 
- let hourChartProp;
-
-    function hourChart(){
+    function amtChart(){
         const ctx = document.getElementById("Chart1").getContext("2d");
 
-        if(hourChartProp) hourChartProp.destroy();
+        if(amountChart) amountChart.destroy();
 
-        hourChartProp = new Chart(ctx, {
-            type:"bar",
+        amountChart = new Chart(ctx, {
+            type:"line",
             data: {
-                labels: records.map(r => r.date),
-                datasets:[{
-                    label: "時間",
-                    data: records.map(r => r.h),
+                labels: transactions.map(tr => tr.date),
+                datasets:[
+                    {
+                    label: "金額",
+                    data: transactions.map(tr => tr.amount),
                     borderWidth:1
-                }],
+                },
+                {
+                    label: "支出",
+                    data: transactions.map(tr => tr.typeSelect),
+                    borderWidth:1
+                },
+                {
+                    label: "収入",
+                    data: transactions.map(tr => tr.typeSelect),
+                    borderWidth:1
+                }
+            
+            ],
+            
             },
             options: {
                 responsive: true,
@@ -162,5 +178,3 @@ function updateTransList(){
             }
         })
     }
-
-    hourChart();
