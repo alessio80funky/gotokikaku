@@ -8,3 +8,15 @@ function doGet(){
     .createTextOutput("Ok:API同期できました")
     .setMimeType(ContentService.MimeType.TEXT)
 }
+
+function doPost(e){
+    try{
+        cosnt ss = SpreadsheetApp.getActiveSpreadsheet();
+
+        cosnt sheet = ss.getSheetByName(SHEET_NAME);
+
+        if (!sheet) throw ne Error(`シート見つからない${SHEET_NAME}`);
+
+        
+    }
+}
